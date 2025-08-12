@@ -1,9 +1,11 @@
 import { FaRegStar } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Book = ({book}) => {
-    const {image, bookName, author, rating, category, tags} = book;
+    const {bookId, image, bookName, author, rating, category, tags} = book;
     return (
-        <div class="card bg-base-100 border border-gray-200 p-5">
+        <Link to={`/books/${bookId}`}>
+           <div class="card bg-base-100 border border-gray-200 p-5">
             <figure className="bg-gray-100 py-6">
                 <img
                 src={image}
@@ -12,7 +14,7 @@ const Book = ({book}) => {
             </figure>
             <div class="card-actions justify-end pt-4">
                     {
-                        tags.map(tag => <p class="badge badge-outline text-[#23BE0A] bg-[#23BE0A0D] rounded-full">{tag}</p>
+                        tags.map((tag, idx) => <p key={idx} class="badge badge-outline text-[#23BE0A] bg-[#23BE0A0D] rounded-full">{tag}</p>
                     )
                     }
             </div>
@@ -29,6 +31,7 @@ const Book = ({book}) => {
 
                 </div>
         </div>
+        </Link>
     );
 };
 
