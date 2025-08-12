@@ -1,7 +1,9 @@
+import Navbar from "../Navbar/Navbar";
+
 const Root = () => {
     return (
-        <div>
-            <h1>From root</h1>
+        <div className="max-w-7xl mx-auto">
+            <Navbar></Navbar>
         </div>
     );
 };
