@@ -7,6 +7,7 @@ import ReadBooksList from '../ReadBooksList/ReadBooksList';
 
 
 const ListedBooks = () => {
+    const [sort, setSort] = useState('');
     const [readList, setReadList] = useState([]);
     const allBooks = useLoaderData();
 
@@ -15,15 +16,31 @@ const ListedBooks = () => {
         const storedReadListInt = storedReadList.map(id => parseInt(id))
         const readBookList = allBooks.filter(book => storedReadListInt.includes(book.bookId))
         setReadList(readBookList);
-    }, [])
+    }, []);
+
+    const handleSort = sortType =>{
+        setSort(sortType);
+
+        if(sortType === 'Number of Pages'){
+            const sortedReadList = [...readList].sort((a,b) => a.totalPages - b.totalPages)
+            setReadList(sortedReadList)
+        }
+
+        if(sortType === 'Ratings'){
+            const sortedReadList = [...readList].sort((a,b) => a.rating - b.rating)
+            setReadList(sortedReadList)
+        }
+    }
     return (
         <div>
             <div className='text-center my-10'>
                  <div className="dropdown dropdown-center">
-                    <div tabIndex={0} role="button" className="btn m-1 bg-[#23BE0A] text-white px-5">Sort By</div>
+                    <div tabIndex={0} role="button" className="btn m-1 bg-[#23BE0A] text-white px-5">
+                        {sort ? `Sort By: ${sort}`: 'Sort By'} 
+                    </div>
                     <ul tabIndex={0} className="dropdown-content menu bg-base-300 rounded-box z-1 w-52 p-2 shadow-sm">
-                        <li><a>Number of Pages</a></li>
-                        <li><a></a></li>
+                        <li onClick={() => handleSort('Number of Pages')}><a>Number of Pages</a></li>
+                        <li onClick={() => handleSort('Ratings')}><a>Ratings</a></li>
                     </ul>
                  </div>
             </div>
