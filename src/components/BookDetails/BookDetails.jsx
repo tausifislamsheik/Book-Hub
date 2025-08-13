@@ -1,4 +1,5 @@
 import { useLoaderData, useParams } from "react-router-dom";
+import { addReadListToLS, addWishlistToLS } from "../../Utility/addToLS";
 
 const BookDetails = () => {
 
@@ -8,6 +9,15 @@ const BookDetails = () => {
     
     const book = data.find(book => book.bookId === id)
     const {image, bookName, author, review, totalPages, rating, category, tags, publisher, yearOfPublishing} = book;
+
+
+    const handleMarkAsRead = (id)=>{
+        addReadListToLS(id)
+    }
+
+    const handleAddToWishlist = (id)=>{
+        addWishlistToLS(id)
+    }
 
 
     return (
@@ -39,8 +49,8 @@ const BookDetails = () => {
                     <p className="font-semibold text-gray-400">Year of Publishing: <span className="text-black">{yearOfPublishing}</span></p>
                     <p className="font-semibold text-gray-400">Rating: <span className="text-black">{rating}</span></p>
                     <div >
-                        <button className="btn btn-outline border-gray-300 mr-4">Read</button>
-                        <button className="btn bg-[#50B1C9] text-white">Wishlist</button>
+                        <button onClick={() => handleMarkAsRead(bookId)} className="btn btn-outline border-gray-300 mr-4">Mark As Read</button>
+                        <button onClick={() => handleAddToWishlist(bookId)} className="btn bg-[#50B1C9] text-white">Add To Wishlist</button>
                     </div>
                 </div>
             </div>
