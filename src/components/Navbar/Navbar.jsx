@@ -2,9 +2,9 @@ import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
     const navList = <>
-        <li><NavLink className={({isActive, isPending}) => isActive ? 'text-green-500' : isPending ? '' : ''} to='/'>Home</NavLink></li>
-        <li><NavLink className={({isActive, isPending}) => isActive ? 'text-green-500' : isPending ? '' : ''} to='/listedBooks'>Listed Books</NavLink></li>
-        <li><NavLink className={({isActive, isPending}) => isActive ? 'text-green-500' : isPending ? '' : ''}>Pages to Read</NavLink></li>
+        <li><NavLink className={({isActive, isPending}) => isActive ? 'text-green-500 bg-green-50 rounded-lg px-3 py-1' : isPending ? '' : ''} to='/'>Home</NavLink></li>
+        <li><NavLink className={({isActive, isPending}) => isActive ? 'text-green-500 bg-green-50 rounded-lg px-3 py-1' : isPending ? '' : ''} to='/listedBooks'>Listed Books</NavLink></li>
+        <li><NavLink className={({isActive, isPending}) => isActive ? 'text-green-500 bg-green-50 rounded-lg px-3 py-1' : isPending ? '' : ''} to='/pagesToRead'>Pages to Read</NavLink></li>
     </>
     return (
         <div class="navbar mt-5">
