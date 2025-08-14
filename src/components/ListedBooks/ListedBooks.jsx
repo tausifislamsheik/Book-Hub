@@ -8,16 +8,19 @@ import WishlistBooks from '../WishlistBooks/WishlistBooks';
 
 
 const ListedBooks = () => {
+    const [loading, setLoading] = useState(true);
     const [sort, setSort] = useState('');
     const [readList, setReadList] = useState([]);
     const [wishList, setWishList] = useState([]);
     const allBooks = useLoaderData();
 
     useEffect(() =>{
+        setLoading(true);
         const storedReadList = getStoredReadList();
         const storedReadListInt = storedReadList.map(id => parseInt(id))
         const readBookList = allBooks.filter(book => storedReadListInt.includes(book.bookId))
         setReadList(readBookList);
+        setLoading(false);
     }, [allBooks]);
 
     useEffect(() =>{
@@ -51,6 +54,20 @@ const ListedBooks = () => {
             setWishList(sortedWishList)
         }
     }
+
+
+   if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading books data...</p>
+        </div>
+      </div>
+    );
+  }
+
+
     return (
         <div>
             <div className='text-center my-10'>
