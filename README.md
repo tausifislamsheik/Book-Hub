@@ -63,9 +63,9 @@
 ## 👨‍💻 Author
 
 **Your Name**
+- Name: TAUSIF ISLAM SHEIK
 - LinkedIn: [@tausifislamsheik](https://www.linkedin.com/in/tausifislamsheik/)
-- GitHub: [@tausifislamsheik](https://github.com/tausifislamsheik)
-- Email: your.email@example.com
+- Email: tausifislamsheik1@gmail.com
 
 ---
 
