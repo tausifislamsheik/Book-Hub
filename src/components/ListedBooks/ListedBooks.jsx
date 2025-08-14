@@ -2,13 +2,15 @@ import { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import { getStoredReadList } from '../../Utility/addToLS';
+import { getStoredReadList, getStoredWishlist } from '../../Utility/addToLS';
 import ReadBooksList from '../ReadBooksList/ReadBooksList';
+import WishlistBooks from '../WishlistBooks/WishlistBooks';
 
 
 const ListedBooks = () => {
     const [sort, setSort] = useState('');
     const [readList, setReadList] = useState([]);
+    const [wishList, setWishList] = useState([]);
     const allBooks = useLoaderData();
 
     useEffect(() =>{
@@ -16,24 +18,37 @@ const ListedBooks = () => {
         const storedReadListInt = storedReadList.map(id => parseInt(id))
         const readBookList = allBooks.filter(book => storedReadListInt.includes(book.bookId))
         setReadList(readBookList);
-    }, []);
+    }, [allBooks]);
+
+    useEffect(() =>{
+        const storedWishList = getStoredWishlist();
+        const storedWishListInt = storedWishList.map(id => parseInt(id))
+        const wishBookList = allBooks.filter(book => storedWishListInt.includes(book.bookId))
+        setWishList(wishBookList);
+    }, [allBooks]);
 
     const handleSort = sortType =>{
         setSort(sortType);
 
         if(sortType === 'Number of Pages'){
             const sortedReadList = [...readList].sort((a,b) => a.totalPages - b.totalPages)
+            const sortedWishList = [...wishList].sort((a,b) => a.totalPages - b.totalPages)
             setReadList(sortedReadList)
+            setWishList(sortedWishList)
         }
 
         if(sortType === 'Ratings'){
             const sortedReadList = [...readList].sort((a,b) => a.rating - b.rating)
+            const sortedWishList = [...wishList].sort((a,b) => a.rating - b.rating)
             setReadList(sortedReadList)
+            setWishList(sortedWishList)
         }
 
         if(sortType === 'Publisher year'){
             const sortedReadList = [...readList].sort((a,b) => a.yearOfPublishing - b.yearOfPublishing)
+            const sortedWishList = [...wishList].sort((a,b) => a.yearOfPublishing - b.yearOfPublishing)
             setReadList(sortedReadList)
+            setWishList(sortedWishList)
         }
     }
     return (
@@ -62,7 +77,9 @@ const ListedBooks = () => {
                 }
                 </TabPanel>
                 <TabPanel>
-                <h2>Any content 2</h2>
+                {
+                    wishList.map(wishBookList => <WishlistBooks wishBookList={wishBookList}></WishlistBooks>)
+                }
                 </TabPanel>
             </Tabs>
         </div>

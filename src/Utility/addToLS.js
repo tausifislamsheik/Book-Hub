@@ -21,11 +21,9 @@ const addReadListToLS = (id) =>{
        storedList.push(id)
        const storedListStr = JSON.stringify(storedList)
        localStorage.setItem('read-list', storedListStr)
-       toast('This book is added in the read list')
+       toast('This book is added in your read list')
     }
 }
-
-
 
 
 
@@ -51,8 +49,9 @@ const addWishlistToLS = (id) =>{
         storedWishlist.push(id);
         const storedWishlistData = JSON.stringify(storedWishlist);
         localStorage.setItem('wishlist', storedWishlistData)
+        toast('This book is added in your wishlist')
     }
 }
 
 
-export {addReadListToLS,addWishlistToLS,getStoredReadList}
+export {addReadListToLS,addWishlistToLS,getStoredReadList,getStoredWishlist}
